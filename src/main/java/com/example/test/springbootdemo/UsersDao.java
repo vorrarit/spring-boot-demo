@@ -30,6 +30,17 @@ public class UsersDao {
 		return null;
 	}
 
+	public User delete(Integer id) {
+		for (User user : users) {
+			if (user.getId() == id) {
+				users.remove(user);
+				return user;
+			}
+		}
+
+		return null;
+	}
+
 	public User save(User user) {
 		if (user.getId() == null) {
 			user.setId(++usersCount);

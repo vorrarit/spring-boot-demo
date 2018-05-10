@@ -3,8 +3,12 @@ package com.example.test.springbootdemo;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
+import org.dom4j.util.UserDataAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +37,7 @@ public class UsersController {
 	}
 
 	@PostMapping(path="/users")
-	public ResponseEntity save(@RequestBody User user) {
+	public ResponseEntity save(@Valid @RequestBody User user) {
 		User savedUser = usersDao.save(user);
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -41,5 +45,16 @@ public class UsersController {
 				.buildAndExpand(savedUser.getId())
 				.toUri();
 		return ResponseEntity.created(location).build();
+	}
+
+	@DeleteMapping(path="/users/{id}")
+	public User delete(@PathVariable int id) {
+		User deletedUser = usersDao.delete(id);
+
+		if (deletedUser == null) {
+			throw new UserNotFoundException("id-" + id);
+		}
+
+		return deletedUser;
 	}
 }

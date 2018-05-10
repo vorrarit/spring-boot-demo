@@ -2,9 +2,16 @@ package com.example.test.springbootdemo;
 
 import java.util.Date;
 
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
 public class User {
 	private Integer id;
+
+	@Size(min=2, message="name at least 2 characters")
 	private String name;
+
+	@Past(message="birth date should be in the past")
 	private Date birthDate;
 
 	public User() {
