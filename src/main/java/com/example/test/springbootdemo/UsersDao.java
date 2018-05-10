@@ -12,8 +12,8 @@ public class UsersDao {
 	private static int usersCount = 2;
 
 	static {
-		users.add(new User(1, "Tom", new Date()));
-		users.add(new User(2, "Ben", new Date()));
+		users.add(new User(1, "Tom", "password", new Date()));
+		users.add(new User(2, "Ben", "password", new Date()));
 	}
 
 	public List<User> findAll() {

@@ -5,11 +5,18 @@ import java.util.Date;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@JsonFilter("UserFilter")
 public class User {
 	private Integer id;
 
 	@Size(min=2, message="name at least 2 characters")
 	private String name;
+
+	@JsonIgnore
+	private String password;
 
 	@Past(message="birth date should be in the past")
 	private Date birthDate;
@@ -18,9 +25,10 @@ public class User {
 
 	}
 
-	public User(Integer id, String name, Date birthDate) {
+	public User(Integer id, String name, String password, Date birthDate) {
 		this.id = id;
 		this.name = name;
+		this.password = password;
 		this.birthDate = birthDate;
 	}
 
@@ -50,6 +58,20 @@ public class User {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	/**
