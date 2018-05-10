@@ -3,6 +3,7 @@ package com.example.test.springbootdemo;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -27,7 +28,7 @@ public class HelloWorldController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "/hello-world-i18n")
-	public String helloWorldI18N(@RequestHeader(name="Accept-Language", required=false) Locale locale) {
-		return messageSource.getMessage("greeting.message", null, locale);
+	public String helloWorldI18N() {
+		return messageSource.getMessage("greeting.message", null, LocaleContextHolder.getLocale());
 	}
 }
