@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@JsonFilter("UserFilter")
+// @JsonFilter("UserFilter")
 public class User {
 	private Integer id;
 
